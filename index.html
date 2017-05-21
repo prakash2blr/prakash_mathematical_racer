@@ -1,0 +1,378 @@
+<html>
+    <head>
+        <title>Mathematical Racer</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui" id="viewport"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="css/bootstrap.min_3.css"/>
+        <link rel="stylesheet" href="css/alertify.core.css"/>
+        <link rel="stylesheet" href="css/alertify.default.css"/>
+        <style>
+            html,body{
+                margin:0;
+                padding:0;
+            }
+            body{
+                background: #28bfff;
+            }
+            .animated {
+                -webkit-animation-duration: 0.5s;
+                animation-duration: 0.5s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            }
+            @-webkit-keyframes slideInDown {
+                0% {
+                    opacity: 0;
+                    -webkit-transform: translateY(-2000px);
+                    transform: translateY(-2000px);
+                }
+
+                100% {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes slideInDown {
+                0% {
+                    opacity: 0;
+                    -webkit-transform: translateY(-2000px);
+                    -ms-transform: translateY(-2000px);
+                    transform: translateY(-2000px);
+                }
+
+                100% {
+                    -webkit-transform: translateY(0);
+                    -ms-transform: translateY(0);
+                    transform: translateY(0);
+                }
+            }
+
+            .slideInDown {
+                -webkit-animation-name: slideInDown;
+                animation-name: slideInDown;
+            }
+            @-webkit-keyframes slideOutUp {
+                0% {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                }
+
+                100% {
+                    opacity: 0;
+                    -webkit-transform: translateY(-2000px);
+                    transform: translateY(-2000px);
+                }
+            }
+
+            @keyframes slideOutUp {
+                0% {
+                    -webkit-transform: translateY(0);
+                    -ms-transform: translateY(0);
+                    transform: translateY(0);
+                }
+
+                100% {
+                    opacity: 0;
+                    -webkit-transform: translateY(-2000px);
+                    -ms-transform: translateY(-2000px);
+                    transform: translateY(-2000px);
+                }
+            }
+
+            .slideOutUp {
+                -webkit-animation-name: slideOutUp;
+                animation-name: slideOutUp;
+            }
+            header{
+                z-index: 999;
+                position: fixed;
+                top: 0;
+                height: 55px;
+                background: whitesmoke;
+                border: 1px solid grey;
+                width: 100%;
+                box-shadow: 0px -2px 9px 2px;
+            }
+            .container{
+                position: fixed;
+                bottom: 0;
+                /* top: 55px; */
+                width: 100%;
+                background: url("images/lawn.jpg");
+                height: 100px;
+                background-size: contain;
+            }
+            .this-will-be-card{
+            }
+            .lawn{
+                /*background: lawngreen;*/
+            }
+            .this-will-be-road-wrapper{
+                margin: 0 auto;
+                border-bottom: 100px solid white;
+                border-left: 120px solid transparent;
+                border-right: 120px solid transparent;
+                height: 0;
+                width:20%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+            .road{
+                margin: 0 auto;
+                border-bottom: 100px solid #808080;
+                border-left: 100px solid transparent;
+                border-right: 100px solid transparent;
+                height: 0;
+                width:20%;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+            .sky{
+                width: 100%;
+                background:url("images/123.jpg") no-repeat;
+                height:100%;
+                background-size: cover;
+            }
+            .road-divider{
+                height: 30px;
+                width: 3px;
+                background: whitesmoke;
+                margin: 0 auto;
+            }
+            .tree-container{
+                position: relative;
+            }
+            .car{
+                position: fixed;
+                bottom: 0;
+                width: 50%;
+                left: 0;
+                right: 0;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .opp-car{
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                width: 22%;
+            }
+            .opp-car img{
+                width: 42px;
+                height: 50px;
+            }
+            @media (min-width: 700px) {
+                .container{
+                    height: 150px;
+                }
+                .this-will-be-road-wrapper{
+                    margin: 0 auto;
+                    border-bottom: 150px solid white;
+                    border-left: 170px solid transparent;
+                    border-right: 170px solid transparent;
+                    height: 0;
+                    width:20%;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
+                .road{
+                    margin: 0 auto;
+                    border-bottom: 150px solid #808080;
+                    border-left: 150px solid transparent;
+                    border-right: 150px solid transparent;
+                    height: 0;
+                    width:20%;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                }
+                .road-divider{
+                    height: 20px;
+                    width: 3px;
+                    background: whitesmoke;
+                    margin: 0 auto;
+                    position: relative;
+                }
+                .car{
+                    width: 40%;
+                }
+                .car img{
+                    width: 150px;
+                    height: 150px;
+                }
+                .opp-car img{
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+            .tree-container img{
+                /*-webkit-transition: all 0.5s ease;*/
+                /*-moz-transition: all 0.5s ease;*/
+                /*-o-transition: all 0.5s ease;*/
+                /*-ms-transition: all 0.5s ease;*/
+                /*transition: all 0.5s ease;*/
+                position: relative;
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
+            @media (max-width:500px){
+                .tree-container img{
+                    height: 70px;
+                    width: 70px;
+                }
+            }
+            #alertify-cancel{
+                display: none !important;
+            }
+            #alertify{
+                background: rgba(255,255,255,0.6);
+                border: 5px solid #333;
+            }
+            .alertify-dialog{
+                padding: 15px;
+            }
+            .result-container{
+                display: table;
+                width: 100%;
+                height: 100%;
+            }
+            .time-container,.ans-container{
+                display: table-cell;
+                width: 50%;
+                height: 55px;
+                vertical-align: middle;
+            }
+            .time-container div,.ans-container div{
+                width: 25%;
+                padding-left: 5px;
+                display: table-cell;
+                font-size: 30px;
+            }
+            #ans-count,#wrong-ans-count{
+                font-size: 30px;
+            }
+            .label-question{
+                display: block;
+                padding: 3px;
+            }
+            p{
+                margin:0 !important;
+                padding: 0 !important;
+            }
+            #error-display{
+                font-size: 15px;
+                font-weight: bolder;
+                position: fixed;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                right: 0;
+                padding: 10px;
+                display: none;
+                background:rgba(130,255,81,0.9);
+                z-index: 9999;
+                text-align: center;
+                color: black;
+            }
+        .total-wrapper{
+            display: none;
+        }
+        .loader img{
+            top: 100px;
+            position: relative;
+            margin: 0 auto;
+        }
+        .blast-img,.blast-img-left{
+            display: none;
+            bottom:-10px;
+            position: fixed;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+        }
+        </style>
+    </head>
+    <body>
+    <div class="loader">
+        <img src="images/load.gif" class="img-responsive" alt=""/>
+    </div>
+    <div class="total-wrapper">
+        <header>
+                <div class="result-container">
+                    <div class="time-container">
+                        <div>
+                            <img src="images/timer30.png" alt=""/>
+                        </div>
+                        <div id="time-count">
+
+                        </div>
+                    </div>
+                    <div class="ans-container">
+                        <div>
+                            <img src="images/right30.png" alt=""/>
+                        </div>
+                        <div id="ans-count">
+                            0
+                        </div>
+                        <div>
+                            <img src="images/wrong30.png" alt=""/>
+                        </div>
+                        <div id="wrong-ans-count">
+                            0
+                        </div>
+                    </div>
+                </div>
+        </header>
+        <div class="sky">
+
+        </div>
+
+    <div class="container">
+        <div id="error-display">
+            <div id="game-options-1" class="game-options">
+
+            </div>
+       </div>
+        <div class="tree-container">
+            <img src="images/tree.png" class="left" alt=""/>
+            <img src="images/bush.png" alt="" style="float: right;z-index: 999999;"/>
+        </div>
+
+        <div class="this-will-be-road-wrapper">
+            <div class="road">
+                    <div class="road-divider">
+
+                    </div>
+            </div>
+        </div>
+        <div class="opp-car">
+            <img src="images/rear_opp1.png" alt=""/>
+        </div>
+        <div class="car">
+            <img src="images/rear1.png" alt=""/>
+        </div>
+        <img class="blast-img" src="images/blast.png" alt=""/>
+    </div>
+</div>
+        <script src="js/lib/jquery.min.js"></script>
+        <script type="text/javascript" src="js/lib/alertify.min.js"></script>
+        <script type="text/javascript" src="js/lib/ion.sound.min.js" ></script>
+        <script type="text/javascript" src="js/lib/preload.js" ></script>
+        <script type="text/javascript" src="js/raceit.js"></script>
+    </body>
+</html>
